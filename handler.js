@@ -5,7 +5,7 @@ function handle(info, hex, admin, config, admins)
 	nick = info[1];
 	chan = info[3];
 
-	pm =  chan.search(/^[^#]/) !== -1;
+	pm = chan.search(/^[^#]/) !== -1;
 	if (pm)
 	{
 		chan = nick;

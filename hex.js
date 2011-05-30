@@ -1,10 +1,10 @@
-var IRC = require('./bot'),
+var IRC = require('bot'),
 	config = require('./config'),
 	handle = require('./handler'),
 	fs = require('fs'),
 	cache, hex, admins = {};
 
-cache = fs.readFileSync('./cache.json', 'utf8');
+cache = fs.readFileSync('./config/cache.json', 'utf8');
 cache = JSON.parse(cache);
 
 config.chans = cache.chans;
@@ -45,7 +45,7 @@ hex.on(/^:([^!]+)![^@]+@([^ ]+) PRIVMSG ([^ ]+) :(.+)/i, function(info)
 	if (flush)
 	{
 		flush = JSON.stringify(cache);
-		fs.writeFileSync('cache.json', flush, 'utf8');
+		fs.writeFileSync('./config/cache.json', flush, 'utf8');
 	}
 });
 
@@ -109,7 +109,7 @@ hex.on(/^:([^!]+)![^@]+@[^ ]+ NICK :(.+)$/, function(info)
 	delete admins[nick];
 });
 
-var Twitter = require('./twitter');
+var Twitter = require('twitter');
 var twit = new Twitter({
 	user: config.twitter.user,
 	pass: config.twitter.pass
