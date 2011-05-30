@@ -3,6 +3,8 @@ var IRC = require('bot'),
 	fs = require('fs'),
 	cache, handler, hex, admins = {};
 
+var start = new Date();
+
 cache = fs.readFileSync('./config/cache.json', 'utf8');
 cache = JSON.parse(cache);
 
