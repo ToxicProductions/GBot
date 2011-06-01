@@ -1,6 +1,7 @@
 var IRC = require('bot'),
 	config = require('./config'),
 	fs = require('fs'),
+	http = require('http'),
 	cache, handler, hex, admins = {};
 
 var start = new Date();
@@ -17,7 +18,7 @@ fs.watchFile('/.handler.js', function()
 	eval(fs.readFileSync('./handler.js', 'utf8'));
 });
 
-hex = new IRC(config)
+hex = new IRC(config);
 
 hex.on(/^:([^!]+)![^@]+@([^ ]+) PRIVMSG ([^ ]+) :(.+)$/i, function(info)
 {
@@ -119,6 +120,12 @@ hex.on(/^:([^!]+)![^@]+@[^ ]+ NICK :(.+)$/, function(info)
 		delete admins[info[1]];
 	}
 });
+
+http.createServer(function(req, res)
+{
+	server(req, res); //wrapper here so that we can edit server()
+}).listen(config.log.web.port, config.log.web.addr);
+console.log('Server now listening.');
 
 var Twitter = require('twitter');
 var twit = new Twitter({
