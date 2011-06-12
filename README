@@ -1,3 +1,5 @@
 An IRC bot for the x10hosting IRC written completely in Node.js
 
+Also contains a games bot which can be started from within Hex.
+
 supervisor --watch README hex.js
