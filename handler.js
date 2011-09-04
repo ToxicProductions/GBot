@@ -1,4 +1,4 @@
-1function handler(info, admin, noreply)
+function handler(info, admin, noreply)
 {
 	var chan, cmd, cmd_end, index, flush, nick, reply, pm, log;
 	flush = false;
